@@ -1,0 +1,14 @@
+com\jc\gymbasicsystemfront\utils\TokenManager.class
+com\jc\gymbasicsystemfront\models\AuthCredentialsDto$AuthCredentialsDtoBuilder.class
+com\jc\gymbasicsystemfront\views\auth\LoginView$2.class
+com\jc\gymbasicsystemfront\models\AuthCredentialsDto.class
+com\jc\gymbasicsystemfront\models\JwtDto$JwtDtoBuilder.class
+com\jc\gymbasicsystemfront\views\HomeView$2.class
+com\jc\gymbasicsystemfront\models\Post.class
+com\jc\gymbasicsystemfront\views\HomeView$1.class
+com\jc\gymbasicsystemfront\Gymbasicsystemfront.class
+com\jc\gymbasicsystemfront\views\auth\LoginView$1.class
+com\jc\gymbasicsystemfront\views\auth\LoginView.class
+com\jc\gymbasicsystemfront\models\JwtDto.class
+com\jc\gymbasicsystemfront\api\GymBasicSystemApi.class
+com\jc\gymbasicsystemfront\views\HomeView.class
