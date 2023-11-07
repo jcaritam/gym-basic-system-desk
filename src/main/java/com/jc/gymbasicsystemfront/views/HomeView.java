@@ -1,25 +1,17 @@
 
 package com.jc.gymbasicsystemfront.views;
 
-import com.jc.gymbasicsystemfront.api.GymBasicSystemApi;
-import com.jc.gymbasicsystemfront.models.Post;
-import com.google.gson.reflect.TypeToken;
-import com.jc.gymbasicsystemfront.utils.TokenManager;
+
+import com.jc.gymbasicsystemfront.views.employee.EmployeeView;
 import java.io.IOException;
 
-import java.util.List;
-//import java.lang.reflect.Type;
 
 public class HomeView extends javax.swing.JFrame {
 
     public HomeView() {
         initComponents();
-      try {
-            getPosts();
-      }catch (Exception e){
-          System.out.println("Error: " + e.getMessage());
-      }
-     
+        setTitle("Gym System");
+
     }
 
     /**
@@ -36,6 +28,7 @@ public class HomeView extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -56,18 +49,27 @@ public class HomeView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Gym System");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(480, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 366, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
-        jMenu3.setText("File");
+        jMenu3.setText("Inicio");
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Mantenerdor");
@@ -114,7 +116,9 @@ public class HomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        EmployeeView employeeView = new EmployeeView();
+        employeeView.setLocationRelativeTo(null);
+        employeeView.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -160,6 +164,7 @@ public class HomeView extends javax.swing.JFrame {
 //        System.out.println("Posts" + posts);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

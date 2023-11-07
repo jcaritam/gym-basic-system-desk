@@ -1,10 +1,20 @@
 package com.jc.gymbasicsystemfront.api;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.jc.gymbasicsystemfront.utils.TokenManager;
 import java.io.IOException;
 import okhttp3.*;
 import java.lang.reflect.Type;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class GymBasicSystemApi {
 
@@ -18,8 +28,11 @@ public class GymBasicSystemApi {
     public GymBasicSystemApi(String baseUrl, TokenManager tokenManager) {
         this.httpClient = new OkHttpClient();
         this.baseUrl = baseUrl;
-        this.gson = new Gson();
+//        this.gson = new Gson();
         this.tokenManager = tokenManager;
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
     }
     
     
@@ -44,6 +57,21 @@ public class GymBasicSystemApi {
 
     public <T> T delete(String endPoint, Type typeOf, boolean withAuth) throws IOException {
         return executeRequest(endPoint, "DELETE", null, typeOf, withAuth);
+    }
+   
+    public static class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        @Override
+        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(formatter.format(localDateTime));
+        }
+
+        @Override
+        public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return LocalDateTime.parse(json.getAsString(), formatter);
+        }
     }
  
     private <T> T executeRequest(

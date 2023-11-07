@@ -2,8 +2,10 @@ package com.jc.gymbasicsystemfront.views.auth;
 
 import com.google.gson.Gson;
 import com.jc.gymbasicsystemfront.api.GymBasicSystemApi;
-import com.jc.gymbasicsystemfront.models.AuthCredentialsDto;
+import com.jc.gymbasicsystemfront.dto.auth.LoginCredentialsDto;
+import com.jc.gymbasicsystemfront.exceptions.AuthException;
 import com.jc.gymbasicsystemfront.models.JwtDto;
+import com.jc.gymbasicsystemfront.services.AuthService;
 import com.jc.gymbasicsystemfront.utils.TokenManager;
 import com.jc.gymbasicsystemfront.views.HomeView;
 import java.awt.Color;
@@ -12,15 +14,19 @@ import java.awt.Insets;
 import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class LoginView extends javax.swing.JFrame {
 
+    private AuthService authService;
+    
     public LoginView() {
         initComponents();
         setTitle("Inicio de sesion");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        this.authService = new AuthService();
     }
 
     /**
@@ -32,6 +38,7 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jdLogin = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
@@ -39,6 +46,17 @@ public class LoginView extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jdLoginLayout = new javax.swing.GroupLayout(jdLogin.getContentPane());
+        jdLogin.getContentPane().setLayout(jdLoginLayout);
+        jdLoginLayout.setHorizontalGroup(
+            jdLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jdLoginLayout.setVerticalGroup(
+            jdLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,32 +135,21 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         HomeView homeView = new HomeView();
-        homeView.setVisible(true);
-        homeView.setLocationRelativeTo(null);
-        System.out.println("Iniciar sesion");
-//        GymBasicSystemApi gymApi = new GymBasicSystemApi("http://localhost:8083/api/v1", new TokenManager());
-//        
-//       AuthCredentialsDto authCredentialsDto = AuthCredentialsDto.builder()
-//        .username(txtUsername.getText())
-//        .password(txtPassword.getText())
-//        .build();
-//       
-//       System.out.println(authCredentialsDto);
-//       
-//        Gson gson = new Gson();
-//        String json = gson.toJson(authCredentialsDto);
-//        
-//        try {
-//            JwtDto resJwt = gymApi.post("/auth/login", json, JwtDto.class, false);
-//            System.out.println(resJwt);
-//            System.out.println(resJwt.toString());
-//
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-        
-//        
-        dispose();
+      
+        LoginCredentialsDto loginCredentialsDto = LoginCredentialsDto.builder()
+        .username(txtUsername.getText())
+        .password(txtPassword.getText())
+        .build();
+        try {
+            authService.login(loginCredentialsDto);
+            homeView.setVisible(true);
+            homeView.setLocationRelativeTo(null);
+
+            dispose();
+        } catch (AuthException e) {
+            JOptionPane.showMessageDialog(this, "Credenciales incorrectas","Alerta", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -186,6 +193,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JDialog jdLogin;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
