@@ -55,11 +55,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="210" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtPassword" min="-2" pref="300" max="-2" attributes="0"/>
-                      <Component id="txtUsername" min="-2" pref="300" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtPassword" pref="300" max="32767" attributes="0"/>
+                      <Component id="txtUsername" max="32767" attributes="0"/>
                       <Component id="jLabel1" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -67,12 +72,7 @@
                           <Component id="btnLogin" min="-2" pref="250" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="80" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="210" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                  <EmptySpace pref="75" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,11 +110,6 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPassword">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btnLogin">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -140,6 +135,11 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
           </Properties>
         </Component>
       </SubComponents>
