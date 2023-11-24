@@ -1,4 +1,3 @@
-
 package com.jc.gymbasicsystemfront.views.employee;
 
 import com.jc.gymbasicsystemfront.dto.employees.CreateEmployeeDto;
@@ -18,11 +17,10 @@ public class EmployeeFormView extends javax.swing.JFrame {
         setTitle("Agregar empleado");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.employeeService = new EmployeeService();
-        
+
         this.employeeViewParent = employeeView;
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -191,12 +189,12 @@ public class EmployeeFormView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
-          if (!isValidEmail(txtEmail.getText())) {
-              JOptionPane.showMessageDialog(null, "Ingrese un correo electrónico válido.");
+        if (!isValidEmail(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(null, "Ingrese un correo electrónico válido.");
             txtEmail.requestFocus();
             return;
         }
-        
+
         if (!isValidPeruvianPhone(txtPhoneNumber.getText())) {
             JOptionPane.showMessageDialog(null, "Ingrese un número de teléfono de Perú válido.");
             txtPhoneNumber.requestFocus();

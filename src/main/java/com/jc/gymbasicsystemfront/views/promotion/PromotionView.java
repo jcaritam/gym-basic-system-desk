@@ -4,7 +4,12 @@
  */
 package com.jc.gymbasicsystemfront.views.promotion;
 
+import com.jc.gymbasicsystemfront.exceptions.CustomServiceException;
+import com.jc.gymbasicsystemfront.models.PromotionDto;
+import com.jc.gymbasicsystemfront.services.PromotionService;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,14 +17,49 @@ import javax.swing.JFrame;
  */
 public class PromotionView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PromotionView
-     */
+    private PromotionService promotionService;
+    private DefaultTableModel tableModelPromotion;
+    
     public PromotionView() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.promotionService = new PromotionService();
+        initTable();
+        loadPromotionsData();
     }
 
+    private void initTable() {
+        tableModelPromotion = new DefaultTableModel();
+        tableModelPromotion.addColumn("Nombre");
+        tableModelPromotion.addColumn("Descripcion");
+        tableModelPromotion.addColumn("Descuento");
+        tableModelPromotion.addColumn("Fecha inicio");
+        tableModelPromotion.addColumn("Fecha fin");
+        tblPromotions.setModel(tableModelPromotion);
+    }
+    
+    private void loadPromotionsData() {
+        try {
+            List<PromotionDto> promotions = promotionService.getAll();
+            
+            for(PromotionDto promotion: promotions) {
+                tableModelPromotion.addRow(new Object[] {
+                    promotion.getName(),
+                    promotion.getDescription(),
+                    promotion.getDiscount(),
+                    promotion.getStartDate(),
+                    promotion.getEndDate(),
+                });
+            }
+        } catch (CustomServiceException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void refreshTblPromotionData() {
+        tableModelPromotion.setRowCount(0);
+        loadPromotionsData();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +71,8 @@ public class PromotionView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnNewPromotion = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPromotions = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,27 +86,43 @@ public class PromotionView extends javax.swing.JFrame {
             }
         });
 
+        tblPromotions.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblPromotions);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(358, Short.MAX_VALUE)
-                .addComponent(btnNewPromotion)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(224, 224, 224)
+                        .addComponent(btnNewPromotion))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnNewPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNewPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,5 +173,7 @@ public class PromotionView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNewPromotion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblPromotions;
     // End of variables declaration//GEN-END:variables
 }

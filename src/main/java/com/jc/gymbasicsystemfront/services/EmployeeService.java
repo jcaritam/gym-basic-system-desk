@@ -12,9 +12,7 @@ import java.util.List;
 import com.jc.gymbasicsystemfront.exceptions.CustomServiceException;
 
 public class EmployeeService {
-
-//    private static Logger = Logger.getLogger(EmployeeService.class.getName());
-    private final ApiManager apiManager = ApiManager.getInstance();
+   private final ApiManager apiManager = ApiManager.getInstance();
     private final String relativeUri = "/employees";
 
     public List<EmployeeDto> getAll() throws CustomServiceException {
