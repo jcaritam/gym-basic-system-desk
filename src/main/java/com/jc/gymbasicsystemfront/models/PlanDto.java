@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class PlanDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String planID;
+    private String planId;
     private String name;
     private String description;
     private float price;

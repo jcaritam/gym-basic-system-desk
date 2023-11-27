@@ -13,6 +13,7 @@ import com.jc.gymbasicsystemfront.exceptions.CustomServiceException;
 import com.jc.gymbasicsystemfront.models.MemberDto;
 import java.io.IOException;
 import java.util.List;
+import java.lang.reflect.Type;
 
 /**
  *
@@ -20,25 +21,36 @@ import java.util.List;
  */
 public class MemberService {
     private final ApiManager apiManager = ApiManager.getInstance();
-    private final String relativeUri = "/member";
+    private final String relativeUri = "/members";
 
     public List<MemberDto> getAll() throws CustomServiceException {
         try {
             GymBasicSystemApi gymApi = apiManager.getGymApi();
-            java.lang.reflect.Type memberListType = new TypeToken<List<MemberDto>>() {
+            Type memberListType = new TypeToken<List<MemberDto>>() {
             }.getType();
             return gymApi.get(relativeUri, memberListType, true);
         } catch (IOException e) {
             throw new CustomServiceException("Error al obtener empleados", e);
         }
     }
+
+    public MemberDto getMemberById(String dni) throws CustomServiceException {
+        try {
+            GymBasicSystemApi gymApi = apiManager.getGymApi();
+            Type memberType = new TypeToken<MemberDto>(){}.getType();
+            
+            return gymApi.get(relativeUri + "/dni/" + dni, memberType, true);
+        } catch(IOException e) {
+            throw new CustomServiceException("Error al obtener miembro", e);
+        }
+    } 
         
     public void createMember(CreateMemberDto createMemberDto) 
             throws CustomServiceException
     {
         try {
             GymBasicSystemApi gymApi = apiManager.getGymApi();
-            java.lang.reflect.Type memberType = new TypeToken<MemberDto>() {
+            Type memberType = new TypeToken<MemberDto>() {
             }.getType();
             
             Gson gson = new Gson();

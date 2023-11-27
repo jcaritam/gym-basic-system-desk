@@ -87,6 +87,7 @@ public class GymBasicSystemApi {
                 .method(method, body);
 
         if (withAuth) {
+            System.out.println("Auth: " + tokenManager.getAccessToken());
             requestBuilder.addHeader("Authorization", "Bearer " + tokenManager.getAccessToken());
         }
 

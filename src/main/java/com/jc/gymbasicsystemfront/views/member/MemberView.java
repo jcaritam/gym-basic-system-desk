@@ -4,7 +4,12 @@
  */
 package com.jc.gymbasicsystemfront.views.member;
 
+import com.jc.gymbasicsystemfront.exceptions.CustomServiceException;
+import com.jc.gymbasicsystemfront.models.MemberDto;
+import com.jc.gymbasicsystemfront.services.MemberService;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,14 +17,56 @@ import javax.swing.JFrame;
  */
 public class MemberView extends javax.swing.JFrame {
 
+    private MemberService memberService;
+    private DefaultTableModel tableModelMember;
     /**
      * Creates new form MemberView
      */
     public MemberView() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        memberService = new MemberService();
+        
+        initTable();
+        loadMembersData();
+    }
+    
+    private void initTable() {
+        tableModelMember = new DefaultTableModel();
+        tableModelMember.addColumn("Nombres");
+        tableModelMember.addColumn("Apellidos");
+        tableModelMember.addColumn("Correo");
+        tableModelMember.addColumn("Telefono");
+        tableModelMember.addColumn("Dni");
+        tableModelMember.addColumn("Fecha de nacimiento");
+        tblMembers.setModel(tableModelMember);
     }
 
+    private void loadMembersData() {
+    
+        try {
+            List<MemberDto> members = memberService.getAll();
+            
+            for (MemberDto member : members) {
+                tableModelMember.addRow(new Object[] {
+                    member.getFirstName(),
+                    member.getLastName(),
+                    member.getEmail(),
+                    member.getPhoneNumber(),
+                    member.getDni(),
+                    member.getDateOfBirth(),
+                });
+            }
+        } catch (CustomServiceException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void refreshTblMemberData () {
+        tableModelMember.setRowCount(0);
+        loadMembersData();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,13 +77,13 @@ public class MemberView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMembers = new javax.swing.JTable();
         btnMember = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMembers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -47,7 +94,7 @@ public class MemberView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMembers);
 
         btnMember.setText("Nuevo miembro");
         btnMember.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +181,6 @@ public class MemberView extends javax.swing.JFrame {
     private javax.swing.JButton btnMember;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblMembers;
     // End of variables declaration//GEN-END:variables
 }

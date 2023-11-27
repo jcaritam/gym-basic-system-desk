@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.jc.gymbasicsystemfront.models;
+package com.jc.gymbasicsystemfront.dto.auth;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -12,25 +12,24 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author Usuario
+ * @author jcaritam
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberDto {
-    private String memberId;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String dni;
-    private LocalDateTime dateOfBirth;
-    private Object[] dailyIncomeEntities;
-    private Object[] memberPlanEntities;
-    private Object[] attendanceEntities;
-    private Object[] groupClassRegistrationEntities;
+public class IAuthUserDetails {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String userId;
+    private String username;
+    private String password;
+    private String role;
+    private boolean enabled;
+    private Object[] authorities;
+    private boolean accountNonExpired;
+    private boolean credentialsNonExpired;
+    private boolean accountNonLocked;
     private boolean active;
 }

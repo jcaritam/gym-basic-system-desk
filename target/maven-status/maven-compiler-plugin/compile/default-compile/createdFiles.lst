@@ -9,6 +9,7 @@ com\jc\gymbasicsystemfront\models\PromotionDto$PromotionDtoBuilder.class
 com\jc\gymbasicsystemfront\dto\plan\CreatePlanDto$CreatePlanDtoBuilder.class
 com\jc\gymbasicsystemfront\views\employee\EmployeeFormView$1.class
 com\jc\gymbasicsystemfront\views\promotion\PromotionView.class
+com\jc\gymbasicsystemfront\views\reports\BarReportView.class
 com\jc\gymbasicsystemfront\views\auth\LoginView$1.class
 com\jc\gymbasicsystemfront\services\EmployeeService$2.class
 com\jc\gymbasicsystemfront\api\GymBasicSystemApi.class
@@ -18,6 +19,7 @@ com\jc\gymbasicsystemfront\models\PlanDto.class
 com\jc\gymbasicsystemfront\views\promotion\PromotionFormView.class
 com\jc\gymbasicsystemfront\dto\auth\LoginCredentialsDto$LoginCredentialsDtoBuilder.class
 com\jc\gymbasicsystemfront\views\plan\PlanFormView.class
+com\jc\gymbasicsystemfront\dto\auth\IAuthUserDetails.class
 com\jc\gymbasicsystemfront\dto\employees\CreateEmployeeDto.class
 com\jc\gymbasicsystemfront\views\plan\PlanView$2.class
 com\jc\gymbasicsystemfront\dto\promotion\CreatePromotionDto.class
@@ -30,13 +32,17 @@ com\jc\gymbasicsystemfront\views\plan\PlanFormView$1.class
 com\jc\gymbasicsystemfront\dto\plan\CreatePlanDto.class
 com\jc\gymbasicsystemfront\models\EmployeeDto.class
 com\jc\gymbasicsystemfront\views\member\MemberView$1.class
+com\jc\gymbasicsystemfront\services\AuthService$1.class
 com\jc\gymbasicsystemfront\services\PromotionService.class
+com\jc\gymbasicsystemfront\views\HomeView$6.class
 com\jc\gymbasicsystemfront\models\EmployeeDto$EmployeeDtoBuilder.class
 com\jc\gymbasicsystemfront\Gymbasicsystemfront.class
 com\jc\gymbasicsystemfront\models\PromotionDto.class
+com\jc\gymbasicsystemfront\views\subscription\SubscriptionFormView$1.class
 com\jc\gymbasicsystemfront\api\ApiManager.class
 com\jc\gymbasicsystemfront\exceptions\CustomServiceException.class
 com\jc\gymbasicsystemfront\views\auth\LoginView.class
+com\jc\gymbasicsystemfront\views\reports\BarReportView$1.class
 com\jc\gymbasicsystemfront\views\member\MemberFormView.class
 com\jc\gymbasicsystemfront\services\EmployeeService.class
 com\jc\gymbasicsystemfront\services\PlanService$1.class
@@ -47,6 +53,7 @@ com\jc\gymbasicsystemfront\services\AuthService.class
 com\jc\gymbasicsystemfront\views\HomeView.class
 com\jc\gymbasicsystemfront\views\HomeView$3.class
 com\jc\gymbasicsystemfront\services\MemberService$1.class
+com\jc\gymbasicsystemfront\views\HomeView$7.class
 com\jc\gymbasicsystemfront\views\employee\EmployeeView$3.class
 com\jc\gymbasicsystemfront\views\member\MemberView$2.class
 com\jc\gymbasicsystemfront\services\MemberService.class
@@ -54,6 +61,7 @@ com\jc\gymbasicsystemfront\views\plan\PlanView$1.class
 com\jc\gymbasicsystemfront\models\JwtDto$JwtDtoBuilder.class
 com\jc\gymbasicsystemfront\views\subscription\SubscriptionFormView.class
 com\jc\gymbasicsystemfront\views\HomeView$4.class
+com\jc\gymbasicsystemfront\views\subscription\SubscriptionFormView$2.class
 com\jc\gymbasicsystemfront\views\employee\EmployeeFormView$2.class
 com\jc\gymbasicsystemfront\dto\promotion\CreatePromotionDto$CreatePromotionDtoBuilder.class
 com\jc\gymbasicsystemfront\services\PlanService.class
@@ -65,7 +73,10 @@ com\jc\gymbasicsystemfront\models\MemberDto$MemberDtoBuilder.class
 com\jc\gymbasicsystemfront\services\PlanService$2.class
 com\jc\gymbasicsystemfront\views\promotion\PromotionView$1.class
 com\jc\gymbasicsystemfront\views\subscription\SubscriptionView$1.class
+com\jc\gymbasicsystemfront\services\MemberService$3.class
+com\jc\gymbasicsystemfront\views\member\MemberFormView$3.class
 com\jc\gymbasicsystemfront\views\HomeView$1.class
+com\jc\gymbasicsystemfront\dto\auth\IAuthUserDetails$IAuthUserDetailsBuilder.class
 com\jc\gymbasicsystemfront\views\employee\EmployeeView$1.class
 com\jc\gymbasicsystemfront\models\JwtDto.class
 com\jc\gymbasicsystemfront\views\employee\EmployeeView.class
@@ -73,4 +84,5 @@ com\jc\gymbasicsystemfront\views\member\MemberView.class
 com\jc\gymbasicsystemfront\services\EmployeeService$1.class
 com\jc\gymbasicsystemfront\views\promotion\PromotionFormView$1.class
 com\jc\gymbasicsystemfront\dto\member\CreateMemberDto$CreateMemberDtoBuilder.class
+com\jc\gymbasicsystemfront\views\HomeView$8.class
 com\jc\gymbasicsystemfront\services\PromotionService$2.class

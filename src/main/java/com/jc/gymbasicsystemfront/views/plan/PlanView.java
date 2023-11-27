@@ -86,10 +86,10 @@ public class PlanView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewPromotionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPromotionActionPerformed
-        PromotionFormView promotionFormView = new PromotionFormView();
+        PlanFormView planFormView = new PlanFormView();
 
-        promotionFormView.setVisible(true);
-        promotionFormView.setLocationRelativeTo(null);
+        planFormView.setVisible(true);
+        planFormView.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnNewPromotionActionPerformed
 
     /**

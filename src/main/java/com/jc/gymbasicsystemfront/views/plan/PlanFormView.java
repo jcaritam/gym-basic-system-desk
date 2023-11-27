@@ -55,7 +55,7 @@ public class PlanFormView extends javax.swing.JFrame {
 
         jButton1.setText("Cancelar");
 
-        jButton2.setText("Guardar");
+        jButton2.setText("Grabar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

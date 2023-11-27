@@ -2,8 +2,14 @@
 package com.jc.gymbasicsystemfront.views;
 
 
+import com.jc.gymbasicsystemfront.dto.auth.IAuthUserDetails;
+import com.jc.gymbasicsystemfront.exceptions.AuthException;
+import com.jc.gymbasicsystemfront.services.AuthService;
 import com.jc.gymbasicsystemfront.views.employee.EmployeeView;
+import com.jc.gymbasicsystemfront.views.member.MemberView;
+import com.jc.gymbasicsystemfront.views.plan.PlanView;
 import com.jc.gymbasicsystemfront.views.promotion.PromotionView;
+import com.jc.gymbasicsystemfront.views.reports.BarReportView;
 import com.jc.gymbasicsystemfront.views.subscription.SubscriptionView;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -11,10 +17,31 @@ import javax.swing.JFrame;
 
 public class HomeView extends javax.swing.JFrame {
 
+    private AuthService authService;
+    
     public HomeView() {
         initComponents();
         setTitle("Gym System");
-
+        
+        authService = new AuthService();
+        validateRoleAuthentication();
+    }
+    
+    private void validateRoleAuthentication (){
+    
+        try {
+            IAuthUserDetails authUser = authService.checkAuth();
+            System.out.println(authUser);
+            if (authUser.getRole().equals("USER")){
+                jmiMember.setVisible(false);
+                jmiEmployee.setVisible(false);
+            
+            }
+            
+        } catch (AuthException e) {
+            System.out.println(e.getMessage());
+        }
+        
     }
 
     /**
@@ -43,15 +70,16 @@ public class HomeView extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mLogout = new javax.swing.JMenuItem();
         mBtnMantenedor = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiEmployee = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmiMember = new javax.swing.JMenuItem();
         miPromotion = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmiPlan = new javax.swing.JMenuItem();
         jmNewSubscirption = new javax.swing.JMenu();
         jmNewSubscription = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jmReports = new javax.swing.JMenu();
+        jmiReports = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -111,19 +139,24 @@ public class HomeView extends javax.swing.JFrame {
 
         mBtnMantenedor.setText("Mantenerdor");
 
-        jMenuItem1.setText("Empleados");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmiEmployee.setText("Empleados");
+        jmiEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmiEmployeeActionPerformed(evt);
             }
         });
-        mBtnMantenedor.add(jMenuItem1);
+        mBtnMantenedor.add(jmiEmployee);
 
         jMenuItem3.setText("Usuarios");
         mBtnMantenedor.add(jMenuItem3);
 
-        jMenuItem2.setText("Clientes");
-        mBtnMantenedor.add(jMenuItem2);
+        jmiMember.setText("Miembros");
+        jmiMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMemberActionPerformed(evt);
+            }
+        });
+        mBtnMantenedor.add(jmiMember);
 
         miPromotion.setText("Promociones");
         miPromotion.addActionListener(new java.awt.event.ActionListener() {
@@ -133,8 +166,13 @@ public class HomeView extends javax.swing.JFrame {
         });
         mBtnMantenedor.add(miPromotion);
 
-        jMenuItem4.setText("Planes");
-        mBtnMantenedor.add(jMenuItem4);
+        jmiPlan.setText("Planes");
+        jmiPlan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPlanActionPerformed(evt);
+            }
+        });
+        mBtnMantenedor.add(jmiPlan);
 
         jMenuBar2.add(mBtnMantenedor);
 
@@ -153,8 +191,17 @@ public class HomeView extends javax.swing.JFrame {
         jMenu7.setText("Asistencia");
         jMenuBar2.add(jMenu7);
 
-        jMenu5.setText("Reportes");
-        jMenuBar2.add(jMenu5);
+        jmReports.setText("Reportes");
+
+        jmiReports.setText("Reportes");
+        jmiReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReportsActionPerformed(evt);
+            }
+        });
+        jmReports.add(jmiReports);
+
+        jMenuBar2.add(jmReports);
 
         setJMenuBar(jMenuBar2);
 
@@ -172,11 +219,11 @@ public class HomeView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmployeeActionPerformed
         EmployeeView employeeView = new EmployeeView();
         employeeView.setLocationRelativeTo(null);
         employeeView.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiEmployeeActionPerformed
 
     private void miPromotionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPromotionActionPerformed
         PromotionView promotionView = new PromotionView();
@@ -193,6 +240,25 @@ public class HomeView extends javax.swing.JFrame {
     private void mLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLogoutActionPerformed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_mLogoutActionPerformed
+
+    private void jmiReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReportsActionPerformed
+        BarReportView barReportView = new BarReportView();
+        barReportView.setVisible(true);
+        barReportView.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jmiReportsActionPerformed
+
+    private void jmiMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMemberActionPerformed
+        MemberView memberView = new MemberView();
+        
+        memberView.setVisible(true);
+        memberView.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jmiMemberActionPerformed
+
+    private void jmiPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPlanActionPerformed
+       PlanView planView = new PlanView();
+       planView.setVisible(true);
+       planView.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jmiPlanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,7 +309,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
@@ -252,14 +317,16 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu jmNewSubscirption;
     private javax.swing.JMenuItem jmNewSubscription;
+    private javax.swing.JMenu jmReports;
+    private javax.swing.JMenuItem jmiEmployee;
+    private javax.swing.JMenuItem jmiMember;
+    private javax.swing.JMenuItem jmiPlan;
+    private javax.swing.JMenuItem jmiReports;
     private javax.swing.JMenu mBtnMantenedor;
     private javax.swing.JMenuItem mLogout;
     private javax.swing.JMenuItem miPromotion;
